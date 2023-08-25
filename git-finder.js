@@ -15,11 +15,11 @@ const { start, end, language } = program.opts();
 
 // Prepare GitHub API Request
 const baseUrl = "https://api.github.com/search/repositories"; // base url
-const query = `stars:>1${language ? "language:${language}" : ""}`; // find repos with at least more than 1 star and filter by language
+const query = `stars:>1${language ? "+language:${language}" : ""}`; // find repos with at least more than 1 star and filter by language
 
 const startDate = start ? `${start}T00:00:00Z` : "1970-01-01T00:00:00Z"; // date + time
 const endDate = end ? `${end}T23:59:59Z` : new Date().toISOString(); // ISO represents dates and times
-const dateRange = `created:${startDate}..${endDate}`; // .. allows from date ranges in queries
+const dateRange = `+created:${startDate}..${endDate}`; // .. allows from date ranges in queries
 
 const apiUrl = `${baseUrl}?q=${query}${dateRange}&sort=stars&order=desc`; // orders in descending order by stars
 
